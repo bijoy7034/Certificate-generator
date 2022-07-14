@@ -4,8 +4,15 @@
 nav {
   background-image: linear-gradient(to bottom,rgba(255, 255, 255), rgba(255, 255, 255));
 }
+#create {
+  background-image: url("pics/home.jpg");
+  background-position: center;
+  background-size: cover;
+}
 #index1{
-  background-image: url("pics/home-bg.jpg");
+  background-image: url("pics/home.jpg");
+  background-position: center;
+  background-size: cover;
 }
 body::before {
     display: block;
@@ -35,7 +42,7 @@ body::before {
   }
   #login_div{
     font-family: Arial, Helvetica, sans-serif;
-    background-image: url("pics/home-bg.jpg");
+    background-image: url("pics/home.jpg");
     background-repeat: no-repeat;
     background-position:center;
     background-size: cover;

@@ -1,5 +1,4 @@
 function createPdf(){
-
     var namesArr = [];
     var deptname =[];
 
