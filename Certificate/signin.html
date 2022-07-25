@@ -15,6 +15,10 @@
                 <div>
                     <img class="img px-5 py-5" src="pics/Certifira__2_-removebg-preview .doc.png" width="300px">
                     <div class="form-floating mb-3">
+                      <input type="text" class="form-control" id="floatingInputw" placeholder="name@example.com">
+                      <label for="floatingInput">Full name</label>
+                    </div><br>
+                    <div class="form-floating mb-3">
                         <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com" required>
                         <label for="floatingInput">Email address</label>
                       </div><br>
@@ -32,7 +36,7 @@
                       <div class="d-grid gap-2">
                         <button class="btn btn-lg btn-danger" onclick="register()" style="width: 100%;" id="btn_login" type="submit">Sign Up</button> <br>
                         <p>Or</p>
-                        <center><p>New User? <a href="signin.html">Sign Up</a></p></center>
+                        <center><p>Have account ? <a href="login.html">Login</a></p></center>
                       </div>
                       <br>
                       <center><p style="color: red;" id="pass_wrong"></p></center><br>
@@ -45,7 +49,8 @@
     <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-firestore.js"></script>
-    <script src="login.js"></script>
+
+
     <script id="MainScript">
         const firebaseConfig = {
           apiKey: "AIzaSyC_hB4uG8ODANtX8Fc9NrjjF3G0Bt9F8cc",
@@ -56,28 +61,31 @@
          appId: "1:529758732995:web:a73f551e0bbff506f51876"
   };
 
-  const app = firebase.initializeApp(firebaseConfig);
+  
+    firebase.initializeApp(firebaseConfig);
 
-  const auth = firebase.auth();
+
+    const auth = firebase.auth();
 
     function register(){
       let pass = document.querySelector("#floatingPassword").value;
       let user = document.querySelector("#floatingInput").value;
-      signInWithEmailAndPassword(auth, user, pass)
-      .then((userCredential) => {
-        const user1 = auth.currentUser
-         window.open("home.html","_self");
-         
-    // ...
-    })
-    .catch(function(error){
+
+      auth.createUserWithEmailAndPassword(user,pass).then(function(){
+
+
+        var user1 = auth.currentUser
+        window.open("login.html","_self");
+
+      }).catch(function(error){
         var error_code = error.code;
         var error_message = error.message;
         alert (error_message);
       })
-    
    
     }
     </script>
+
+    
 </body>
 </html>

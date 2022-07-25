@@ -1,6 +1,9 @@
 function createPdf(){
+
+    var date1 = document.querySelector("#validationDefault01").value;
+    var date2 = document.querySelector("#validationDefault02").value;
     var namesArr = [];
-    var deptname =[];
+    var eventname =[];
 
     Papa.parse(document.querySelector('#formFile').files[0],
     {
@@ -8,14 +11,13 @@ function createPdf(){
         header : true,
         skipEmpty: true,
         complete : function(results){
-            console.log(results.data[1].Deptname);
             for(i =0 ; i < results.data.length;i++){
                 namesArr.push(results.data[i].FullName);
-                deptname.push(results.data[i].Deptname);
+                eventname.push(results.data[i].Event);
             }
             console.log(namesArr[2]);
             for(j=0; j<namesArr.length;j++){
-                generatePDF(String(namesArr[j]),String(deptname[j]));
+                generatePDF(String(namesArr[j]),date1 + " to " + date2,String(eventname[j]));
             }
             
         }
@@ -24,7 +26,7 @@ function createPdf(){
 
 
 
-    const generatePDF= async (name,deptname)=>{
+    const generatePDF= async (name,deptname,eventname)=>{
         const {PDFDocument, rgb} = PDFLib;
         const exBytes = await fetch ("5.pdf").then((res) =>{
             return res.arrayBuffer();
@@ -42,13 +44,18 @@ function createPdf(){
         const firstPg = pages[0];
         firstPg.drawText(name,{
             x: 246,
-            y:398,
-            size: 15,
+            y:342,
+            size: 17,
         });
         firstPg.drawText(deptname,{
-            x: 166,
-            y:378,
-            size:15,
+            x: 136,
+            y:258,
+            size:17,
+        });
+        firstPg.drawText(eventname,{
+            x: 146,
+            y:313,
+            size:17,
         });
         
     
@@ -56,6 +63,7 @@ function createPdf(){
         const uri = await PDFDoc.saveAsBase64({dataUri : true});
         // document.querySelector("#myPdf").src = uri;
         saveAs(uri, "Certificate.pdf", {autoBom : true})
+        
     };
     
     // generatePDF(name1);
